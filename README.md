@@ -1,5 +1,7 @@
 # url-shortner-frontend
 
+A frontend for URL shortner api made with nodejs and vuejs
+
 ## Project setup
 ```
 npm install

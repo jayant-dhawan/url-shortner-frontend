@@ -72,7 +72,6 @@ export default class Register extends Vue {
         password: this.password
       })
       .then(res => {
-        console.log(res);
         if (res.email == this.email) {
           this.$router.push({
             path: "/",
@@ -85,7 +84,6 @@ export default class Register extends Vue {
         }
       })
       .catch(err => {
-        console.log(err);
         this.loginError = err;
       });
   }

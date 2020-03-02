@@ -20,7 +20,9 @@ class UsersModule extends VuexModule {
 
   @Mutation
   setUser(user: User) {
-    this.user = user;
+    if (user.email) {
+      this.user = user;
+    }
   }
 
   @Action
@@ -32,14 +34,12 @@ class UsersModule extends VuexModule {
   async login(user: UserLogin) {
     clearJWT();
     const response = await login(user);
-    console.log(response);
     setJWT(response.token);
     localStorage.setItem("token", response.token);
     localStorage.setItem("email", response.email);
     localStorage.setItem("firstname", response.firstname);
     localStorage.setItem("lastname", response.lastname);
     localStorage.setItem("verified", response.verified);
-    //console.log(response)
     return response;
   }
 }

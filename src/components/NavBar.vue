@@ -36,9 +36,9 @@
           >
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" v-if="user" to="/register"
-            >Logout</router-link
-          >
+          <button class="btn btn-dark" v-if="user" @click="logout">
+            Logout
+          </button>
         </li>
       </ul>
     </div>
@@ -53,6 +53,10 @@ import users from "@/store/modules/users";
 export default class NavBar extends Vue {
   get user() {
     return users.user;
+  }
+  logout() {
+    console.log("logout");
+    window.location.href = "/";
   }
 }
 </script>

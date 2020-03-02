@@ -1,9 +1,9 @@
 export interface User {
+  email: string;
   token: string;
   firstname: string;
   lastname: string;
-  email: string;
-  verified: string;
+  verified: boolean;
 }
 
 export interface UserLogin {
@@ -32,10 +32,14 @@ export interface Shorten {
 
 export interface ShortenUrl {
   url: string;
-  email: string;
 }
 
-export interface Mylinks {
+export interface MyLinks {
+  error: string;
+  status: string;
+  redirects?: RedirectsEntity[] | null;
+}
+export interface RedirectsEntity {
   email: string;
   redirect: string;
   redirectid: string;
@@ -43,6 +47,12 @@ export interface Mylinks {
 }
 
 export interface LinkDetails {
+  error?: string;
+  status?: string;
+  linkDetails?: LinkDetailsEntity[] | null;
+}
+
+export interface LinkDetailsEntity {
   redirectid: string;
   ip: string;
   country: string;

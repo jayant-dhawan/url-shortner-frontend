@@ -40,7 +40,7 @@
             </div>
             <div class="card-body">
               <p>
-                <a :href="shortUrl">{{ shortUrl }}</a>
+                <a :href="`http://${shortUrl}`">{{ shortUrl }}</a>
               </p>
             </div>
           </form>
@@ -66,7 +66,6 @@ export default class Home extends Vue {
   shortUrl = "";
   shortError = false;
   shortFailed = false;
-  email = "jayantdhawan@jd.com";
 
   get user() {
     return users.user;
@@ -74,7 +73,7 @@ export default class Home extends Vue {
 
   shorten() {
     redirects
-      .shorten({ url: this.url, email: this.email })
+      .shorten({ url: this.url })
       .then(response => {
         if (response.shortUrl) {
           this.shortUrl = response.shortUrl;

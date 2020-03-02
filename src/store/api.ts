@@ -5,7 +5,7 @@ import {
   RegisterResponse,
   Shorten,
   ShortenUrl,
-  Mylinks,
+  MyLinks,
   LinkDetails
 } from "@/store/model";
 
@@ -38,10 +38,11 @@ export async function shorten(url: ShortenUrl) {
 
 export async function getMyLinks() {
   const response = await api.get("/redirects");
-  return response.data as Mylinks[];
+  return response.data as MyLinks;
 }
 
 export async function getLinkDetails(redirectid: string) {
-  const response = await api.get("/click/details/" + redirectid);
-  return response.data as LinkDetails[];
+  const response = await api.get(`/click/details/${redirectid}`);
+  //console.table(response.data);
+  return response;
 }

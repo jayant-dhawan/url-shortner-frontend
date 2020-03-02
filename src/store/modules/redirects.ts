@@ -7,7 +7,7 @@ import {
 } from "vuex-module-decorators";
 import { shorten, getMyLinks, getLinkDetails } from "@/store/api";
 import store from "@/store";
-import { ShortenUrl, Mylinks } from "../model";
+import { ShortenUrl, MyLinks } from "../model";
 
 @Module({
   namespaced: true,
@@ -16,10 +16,9 @@ import { ShortenUrl, Mylinks } from "../model";
   dynamic: true
 })
 class ShortenModule extends VuexModule {
-  links: Mylinks[] = [];
-
+  links: MyLinks | null = null;
   @Mutation
-  setMyLinks(links: Mylinks[]) {
+  setMyLinks(links: MyLinks) {
     this.links = links;
   }
 
@@ -32,13 +31,14 @@ class ShortenModule extends VuexModule {
   @Action
   async getLinkDetails(redirectid: string) {
     const response = await getLinkDetails(redirectid);
+
+    console.table(response);
     return response;
   }
 
   @Action
   async shorten(url: ShortenUrl) {
     const response = await shorten(url);
-    console.log(response);
     return response;
   }
 }

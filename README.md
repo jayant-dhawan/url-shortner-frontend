@@ -2,6 +2,8 @@
 
 A frontend for URL shortner api made with nodejs and vuejs
 
+This app is live at https://shorturl-jd.netlify.app/
+
 ## Project setup
 ```
 npm install

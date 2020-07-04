@@ -19,7 +19,7 @@
             class="card col-sm-10 col-md-5 col-lg-5 p-3"
             style="margin: inherit;"
           >
-            <form>
+            <form @submit.prevent>
               <div class="form-group">
                 <label for="url" class="float-left">Enter Big URL:</label>
                 <input
@@ -32,7 +32,7 @@
               </div>
               <button
                 @click="shorten"
-                type="shorten"
+                type="submit"
                 class="btn btn-primary float-right"
               >
                 Shorten

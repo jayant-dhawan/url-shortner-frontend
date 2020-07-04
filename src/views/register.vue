@@ -4,7 +4,7 @@
       <p v-if="registerError">{{ message }}</p>
     </div>
     <div class="card col-sm-10 col-md-6 col-lg-6 mx-auto">
-      <form class="card-body">
+      <form class="card-body" @submit.prevent>
         <div class="form-group">
           <label class="float-left" for="first">First Name</label>
           <input

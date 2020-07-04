@@ -19,7 +19,12 @@ export interface UserRegister {
 }
 
 export interface RegisterResponse {
-  user: UserRegister;
+  status?: boolean;
+  message?: string;
+  firstname?: string;
+  lastname?: string;
+  email?: string;
+  password?: string;
 }
 
 export interface LoginResponse {

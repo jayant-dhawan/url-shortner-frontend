@@ -32,22 +32,15 @@
         class="col-sm-10 col-md-6 col-lg-6"
         style="display: block; overflow: auto;"
       >
-        <h3 v-if="linkDetail.length && !linkDetailEmpty">
-          Total Clicks {{ linkDetail.length }}
-        </h3>
-        <p
-          class="alert alert-success"
-          v-if="(linkDetail.length = 0 && linkDetailEmpty)"
-        >
+        <h3 v-if="linksCount > 0">Total Clicks {{ linksCount }}</h3>
+        <h3 v-if="linksCount == 0">No Clicks</h3>
+        <p class="alert alert-success" v-if="linksCount == 0">
           Click data not available.
         </p>
-        <p
-          class="alert alert-danger"
-          v-if="linkDetailFailed && linkDetailEmpty"
-        >
+        <p class="alert alert-danger" v-if="linkDetailFailed">
           There is an error.
         </p>
-        <table class="table" v-if="linkDetail.length && !linkDetailEmpty">
+        <table class="table" v-if="linksCount > 0">
           <thead class="table-head">
             <th>Click IP</th>
             <th>Country</th>
@@ -93,7 +86,7 @@ import { LinkDetailsEntity } from "../store/model";
 @Component
 export default class MyLinks extends Vue {
   linkDetail: LinkDetailsEntity[] = [];
-  linkDetailEmpty = false;
+  linksCount = 0;
   linkDetailFailed = false;
 
   get links() {
@@ -108,7 +101,14 @@ export default class MyLinks extends Vue {
   getDetails(redirectid: string) {
     getLinkDetails(redirectid).then(details => {
       console.log(details.data);
+
+      if (details.data.status == "failed") {
+        this.linkDetailFailed = true;
+        return;
+      }
+
       this.linkDetail = details.data.linkDetails;
+      this.linksCount = this.linkDetail.length;
       //console.log()
       /* if (details.status == "successfull") {
         this.linkDetail = details.linkDetails;

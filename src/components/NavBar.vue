@@ -48,6 +48,7 @@
 <script lang="ts">
 import { Vue, Component } from "vue-property-decorator";
 import users from "@/store/modules/users";
+import { clearJWT } from "@/store/api";
 
 @Component
 export default class NavBar extends Vue {
@@ -55,8 +56,10 @@ export default class NavBar extends Vue {
     return users.user;
   }
   logout() {
-    console.log("logout");
-    window.location.href = "/";
+    clearJWT();
+    users.deleteUser();
+    localStorage.removeItem("user");
+    window.location.reload();
   }
 }
 </script>

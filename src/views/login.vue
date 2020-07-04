@@ -74,10 +74,7 @@ export default class Register extends Vue {
       .then(res => {
         if (res.email == this.email) {
           this.$router.push({
-            path: "/",
-            params: {
-              resgisterStatus: "true"
-            }
+            path: "/"
           });
         } else {
           this.loginFailed = true;

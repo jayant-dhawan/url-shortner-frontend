@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid py-5">
     <div v-if="registerError" class="alert alert-danger">
-      <p v-if="registerError">Registeration Failed</p>
+      <p v-if="registerError">{{ message }}</p>
     </div>
     <div class="card col-sm-10 col-md-6 col-lg-6 mx-auto">
       <form class="card-body">
@@ -68,6 +68,7 @@ export default class Register extends Vue {
   firstname = "";
   lastname = "";
   registerError = false;
+  message = "Registeration Failed";
 
   register() {
     users
@@ -77,13 +78,18 @@ export default class Register extends Vue {
         firstname: this.firstname,
         lastname: this.lastname
       })
-      .then(() => {
-        this.$router.push({
-          path: "login",
-          query: {
-            resgisterStatus: "true"
-          }
-        });
+      .then(res => {
+        if (res.message == "Signup Successfull") {
+          this.$router.push({
+            path: "login",
+            query: {
+              resgisterStatus: "true"
+            }
+          });
+        } else {
+          this.registerError = true;
+          this.message = res.message || "Registeration Failed";
+        }
       })
       .catch(err => (this.registerError = err));
   }

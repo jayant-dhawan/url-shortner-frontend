@@ -21,25 +21,28 @@ class UsersModule extends VuexModule {
   @Mutation
   setUser(user: User) {
     if (user.email) {
+      setJWT(user.token);
       this.user = user;
     }
+  }
+
+  @Mutation
+  deleteUser(){
+    this.user = null;
   }
 
   @Action
   async register(user: UserRegister) {
     const response = await register(user);
+    console.log(response);
     return response;
   }
+
   @Action({ commit: "setUser" })
   async login(user: UserLogin) {
     clearJWT();
     const response = await login(user);
-    setJWT(response.token);
-    localStorage.setItem("token", response.token);
-    localStorage.setItem("email", response.email);
-    localStorage.setItem("firstname", response.firstname);
-    localStorage.setItem("lastname", response.lastname);
-    localStorage.setItem("verified", response.verified);
+    localStorage.setItem('user', JSON.stringify(response));
     return response;
   }
 }

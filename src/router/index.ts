@@ -23,17 +23,34 @@ const routes = [
   {
     path: "/mylinks",
     name: "My Links",
+    meta: {
+      requireAuth: true
+    },
     component: () => import("@/views/mylinks.vue")
   },
   {
     path: "/:redirect",
     name: "Redirect",
+    meta: {
+      requireAuth: true
+    },
     component: () => import("@/views/redirect.vue")
   }
 ];
 
 const router = new VueRouter({
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.requireAuth) {
+    if(localStorage.getItem('user') != null){
+      next();
+    } else {
+      router.push('/');
+    }
+  }
+  next();
 });
 
 export default router;

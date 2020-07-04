@@ -15,35 +15,41 @@
           <p>There is some error</p>
         </div>
         <div class="row py-5 m-2">
-          <form class="card col-sm-10 col-md-5 col-lg-5 mr-auto p-3">
-            <div class="form-group">
-              <label for="url" class="float-left">Enter Big URL:</label>
-              <input
-                type="text"
-                class="form-control"
-                id="url"
-                v-model="url"
-                required
-              />
-            </div>
-            <button
-              @click="shorten"
-              type="shorten"
-              class="btn btn-primary float-right"
-            >
-              Shorten
-            </button>
-          </form>
-          <form class="card col-sm-10 col-md-6 col-lg-6 ml-auto">
-            <div class="form-group card-header">
-              <label class="float-left">Short URL:</label>
+          <div
+            class="card col-sm-10 col-md-5 col-lg-5 p-3"
+            style="margin: inherit;"
+          >
+            <form>
+              <div class="form-group">
+                <label for="url" class="float-left">Enter Big URL:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="url"
+                  v-model="url"
+                  required
+                />
+              </div>
+              <button
+                @click="shorten"
+                type="shorten"
+                class="btn btn-primary float-right"
+              >
+                Shorten
+              </button>
+            </form>
+          </div>
+          <div
+            class="card col-sm-10 col-md-6 col-lg-6 p-0"
+            style="margin: inherit;"
+          >
+            <div class="card-header">
+              <span class="float-left">Short URL</span>
             </div>
             <div class="card-body">
-              <p>
-                <a :href="`http://${shortUrl}`">{{ shortUrl }}</a>
-              </p>
+              <a :href="`http://${shortUrl}`">{{ shortUrl }}</a>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>

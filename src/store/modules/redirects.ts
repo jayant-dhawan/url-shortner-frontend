@@ -5,7 +5,7 @@ import {
   getModule,
   Mutation
 } from "vuex-module-decorators";
-import { shorten, getMyLinks, getLinkDetails } from "@/store/api";
+import { shorten, getMyLinks, getLinkDetails, deleteURL } from "@/store/api";
 import store from "@/store";
 import { ShortenUrl, MyLinks } from "../model";
 
@@ -31,8 +31,12 @@ class ShortenModule extends VuexModule {
   @Action
   async getLinkDetails(redirectid: string) {
     const response = await getLinkDetails(redirectid);
+    return response;
+  }
 
-    console.table(response);
+  @Action
+  async deleteURL(redirectid: string) {
+    const response = await deleteURL(redirectid);
     return response;
   }
 

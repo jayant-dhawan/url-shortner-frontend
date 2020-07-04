@@ -10,7 +10,7 @@ import {
 } from "@/store/model";
 
 export const api = axios.create({
-  baseURL: "http://localhost:5000/"
+  baseURL: "https://api-urlshortener.herokuapp.com/"
 });
 
 export async function register(user: UserRegister) {
@@ -45,5 +45,10 @@ export async function getMyLinks() {
 export async function getLinkDetails(redirectid: string) {
   const response = await api.get(`/click/details/${redirectid}`);
   //console.table(response.data);
+  return response;
+}
+
+export async function deleteURL(redirectid: string) {
+  const response = await api.delete(`/redirects?id=${redirectid}`);
   return response;
 }

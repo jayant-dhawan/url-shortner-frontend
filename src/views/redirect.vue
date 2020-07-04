@@ -9,7 +9,7 @@ import { Vue, Component } from "vue-property-decorator";
 export default class Redirect extends Vue {
   created() {
     window.location.href =
-      "http://localhost:5000/r/" + this.$route.params.redirect;
+      "https://api-urlshortener.herokuapp.com/r/" + this.$route.params.redirect;
   }
 }
 </script>

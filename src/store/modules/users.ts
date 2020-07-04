@@ -27,14 +27,13 @@ class UsersModule extends VuexModule {
   }
 
   @Mutation
-  deleteUser(){
+  deleteUser() {
     this.user = null;
   }
 
   @Action
   async register(user: UserRegister) {
     const response = await register(user);
-    console.log(response);
     return response;
   }
 
@@ -42,7 +41,7 @@ class UsersModule extends VuexModule {
   async login(user: UserLogin) {
     clearJWT();
     const response = await login(user);
-    localStorage.setItem('user', JSON.stringify(response));
+    localStorage.setItem("user", JSON.stringify(response));
     return response;
   }
 }

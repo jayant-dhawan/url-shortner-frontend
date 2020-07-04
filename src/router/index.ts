@@ -39,16 +39,16 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes
 });
 
 router.beforeEach((to, from, next) => {
-  if(to.meta.requireAuth) {
-    if(localStorage.getItem('user') != null){
+  if (to.meta.requireAuth) {
+    if (localStorage.getItem("user") != null) {
       next();
     } else {
-      router.push('/');
+      router.push("/");
     }
   }
   next();

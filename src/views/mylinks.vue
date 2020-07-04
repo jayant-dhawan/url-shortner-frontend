@@ -133,8 +133,6 @@ export default class MyLinks extends Vue {
     this.showDetail = false;
     this.loading = true;
     getLinkDetails(redirectid).then(details => {
-      console.log(details.data);
-
       if (details.data.status == "failed") {
         this.linkDetailFailed = true;
         return;

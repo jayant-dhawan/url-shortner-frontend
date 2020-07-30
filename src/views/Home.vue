@@ -35,6 +35,12 @@
                 type="submit"
                 class="btn btn-primary float-right"
               >
+                <span
+                  v-if="disabled"
+                  class="spinner-border spinner-border-sm"
+                  style="margin-right: 10px;"
+                  aria-hidden="true"
+                ></span>
                 Shorten
               </button>
             </form>
@@ -72,12 +78,14 @@ export default class Home extends Vue {
   shortUrl = "";
   shortError = false;
   shortFailed = false;
+  disabled = false;
 
   get user() {
     return users.user;
   }
 
   shorten() {
+    this.disabled = true;
     redirects
       .shorten({ url: this.url })
       .then(response => {
@@ -87,9 +95,11 @@ export default class Home extends Vue {
         } else {
           this.shortFailed = true;
         }
+        this.disabled = false;
       })
       .catch(error => {
         this.shortError = error;
+        this.disabled = false;
       });
   }
 }

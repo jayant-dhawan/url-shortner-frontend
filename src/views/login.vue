@@ -46,7 +46,14 @@
           @click="login"
           type="submit"
           class="btn btn-primary float-right"
+          :disabled="disabled"
         >
+          <span
+            v-if="disabled"
+            class="spinner-border spinner-border-sm"
+            style="margin-right: 10px;"
+            aria-hidden="true"
+          ></span>
           Login
         </button>
       </form>
@@ -59,13 +66,15 @@ import { Vue, Component } from "vue-property-decorator";
 import users from "@/store/modules/users";
 
 @Component
-export default class Register extends Vue {
+export default class Login extends Vue {
   email = "";
   password = "";
   loginError = false;
   loginFailed = false;
+  disabled = false;
 
   login() {
+    this.disabled = true;
     users
       .login({
         email: this.email,
@@ -79,9 +88,11 @@ export default class Register extends Vue {
         } else {
           this.loginFailed = true;
         }
+        this.disabled = false;
       })
       .catch(err => {
         this.loginError = err;
+        this.disabled = false;
       });
   }
 }

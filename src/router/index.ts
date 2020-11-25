@@ -31,9 +31,6 @@ const routes = [
   {
     path: "/:redirect",
     name: "Redirect",
-    meta: {
-      requireAuth: true
-    },
     component: () => import("@/views/redirect.vue")
   }
 ];

@@ -12,8 +12,8 @@
             <tr v-for="link in links" :key="link.redirectid">
               <td>
                 <a
-                  :href="'http://shorturl-jd.netlify.app/' + link.redirectid"
-                  >{{ "http://shorturl-jd.netlify.app/" + link.redirectid }}</a
+                  :href="'http://api-urlshortener.herokuapp.com/r/' + link.redirectid"
+                  >{{ "http://api-urlshortener.herokuapp.com/r/" + link.redirectid }}</a
                 >
               </td>
               <td>

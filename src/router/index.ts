@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import { decode } from "jsonwebtoken";
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,14 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {
     if (localStorage.getItem("user") != null) {
+      const user = JSON.parse(localStorage.getItem("user") || "");
+      const jwtDecode = decode(user.token, { complete: true, json: true });
+
+      if(jwtDecode && jwtDecode.payload.exp * 1000 - Date.now() < 0) {
+        localStorage.removeItem("user");
+        router.push("/");
+      }
+      
       next();
     } else {
       router.push("/");

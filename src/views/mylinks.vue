@@ -12,12 +12,12 @@
             <tr v-for="link in links" :key="link.redirectid">
               <td>
                 <a
-                  :href="'http://api-urlshortener.herokuapp.com/r/' + link.redirectid"
+                  :href="'http://api-urlshortener.herokuapp.com/r/' + link.redirectid" target="_blank"
                   >{{ "http://api-urlshortener.herokuapp.com/r/" + link.redirectid }}</a
                 >
               </td>
               <td>
-                <a :href="link.redirect">{{ link.redirect }}</a>
+                <a :href="link.redirect" target="_blank">{{ link.redirect }}</a>
               </td>
               <td>
                 <a
@@ -63,21 +63,19 @@
           <thead class="table-head">
             <th>Click IP</th>
             <th>Country</th>
-            <th>Region</th>
             <th>City</th>
-            <th>Timezone</th>
+            <th>Timestamp</th>
           </thead>
           <tbody
             class="table-body"
             v-for="detail in linkDetail"
-            :key="detail.redirectid + detail.ip"
+            :key="detail._id"
           >
             <tr>
               <td>{{ detail.ip }}</td>
               <td>{{ detail.country }}</td>
-              <td>{{ detail.region }}</td>
               <td>{{ detail.city }}</td>
-              <td>{{ detail.timezone }}</td>
+              <td>{{ getTimeStamp(detail._id) }}</td>
             </tr>
           </tbody>
         </table>
@@ -141,6 +139,13 @@ export default class MyLinks extends Vue {
       this.loading = false;
       this.showDetail = true;
     });
+  }
+
+  getTimeStamp(_id: string) {
+    const timeInMiliseconds = parseInt(_id.substring(0,8), 16) * 1000;
+    const timestamp = new Date(timeInMiliseconds);
+
+    return timestamp.toString().substring(0,24);
   }
 }
 </script>
